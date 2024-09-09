@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Manager</title>
+    <style>
+        /* Basic styling */
+        body { font-family: Arial, sans-serif; }
+        form { max-width: 500px; margin: auto; }
+        input, button { padding: 10px; margin: 5px 0; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Contact Manager</h1>
+    <form id="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company"><br>
+        <button type="submit">Save Contact</button>
+    </form>
+    <h2>Contact List</h2>
+    <table id="contact-list">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Company</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Contacts will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const company = document.getElementById('company').value;
+
+            const table = document.getElementById('contact-list').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            newRow.insertCell(0).textContent = name;
+            newRow.insertCell(1).textContent = phone;
+            newRow.insertCell(2).textContent = email;
+            newRow.insertCell(3).textContent = company;
+
+            // Clear form fields
+            this.reset();
+        });
+    </script>
+</body>
+</html>
