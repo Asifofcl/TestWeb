@@ -3,55 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greeting Page</title>
+    <title>Contact Manager</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            text-align: center;
-        }
-        #greeting {
-            font-size: 2em;
-            color: #333;
-        }
-        input[type="text"] {
-            padding: 10px;
-            font-size: 1em;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+        /* Basic styling */
+        body { font-family: Arial, sans-serif; }
+        form { max-width: 500px; margin: auto; }
+        input, button { padding: 10px; margin: 5px 0; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ddd; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Enter your name</h1>
-        <input type="text" id="nameInput" placeholder="Your Name">
-        <button onclick="displayGreeting()">Submit</button>
-        <div id="greeting"></div>
-    </div>
+    <h1>Contact Manager</h1>
+    <form id="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company"><br>
+        <button type="submit">Save Contact</button>
+    </form>
+    <h2>Contact List</h2>
+    <table id="contact-list">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Company</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Contacts will be inserted here -->
+        </tbody>
+    </table>
+
     <script>
-        function displayGreeting() {
-            const name = document.getElementById('nameInput').value;
-            const greetingElement = document.getElementById('greeting');
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
             
-            if (name.trim() === '') {
-                greetingElement.textContent = 'Please enter your name!';
-            } else {
-                greetingElement.textContent = `Hello , ${name}`;
-            }
-        }
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const company = document.getElementById('company').value;
+
+            const table = document.getElementById('contact-list').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            newRow.insertCell(0).textContent = name;
+            newRow.insertCell(1).textContent = phone;
+            newRow.insertCell(2).textContent = email;
+            newRow.insertCell(3).textContent = company;
+
+            // Clear form fields
+            this.reset();
+        });
     </script>
 </body>
 </html>
